@@ -6,10 +6,6 @@ router.get('/',require('../controllers/homeController').home);
 
 router.use('/users',require('./users.js'));
 
-
-
-
 module.exports = router;
-
 
 console.log("successs");
