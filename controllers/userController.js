@@ -6,6 +6,7 @@ module.exports.profile = function(req,res){
     //     return res.redirect('/users/sign-in');
     // }
     User.findById(req.cookies.user_id,function(err,user){
+        // console.log(user);
         if(err){console.log("Cant find user profile"); return;}
         if(!user){
             return res.redirect('/users/sign-in');
