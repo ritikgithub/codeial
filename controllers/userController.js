@@ -1,7 +1,9 @@
 const User = require('../models/user.js');
 
 module.exports.profile = function(req,res){
-    return res.render('user_profile');
+    return res.render('user_profile',{
+        title: 'user-profile'
+    });
 };
 
 module.exports.signIn = function(req,res){
@@ -53,7 +55,10 @@ module.exports.create  = function(req,res){
 }
 
 module.exports.login = function(req,res){
+    return res.redirect('/users/profile');
+};
 
-    
-
+module.exports.signOut = function(req,res){
+    req.logout();
+    return res.redirect('/users/sign-in');
 };

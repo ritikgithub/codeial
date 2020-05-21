@@ -1,3 +1,9 @@
 <header>
-    Its Header
+    <% if(!locals.user) { %>
+    <a href="/users/sign-up">signUp</a>
+    <a href="/users/sign-in">signIn</a>
+    <% } else { %>
+    <p> Hey <%= user.name %> </p>
+    <a href="/users/sign-out">signOut</a>
+    <% } %>
 </header>

@@ -9,3 +9,5 @@ db.on('error',
 db.once('open',function(){
     console.log("Server is connected to database");
 });
+
+module.exports = db;
