@@ -1,9 +1,14 @@
 <header>
-    <% if(!locals.user) { %>
-    <a href="/users/sign-up">signUp</a>
-    <a href="/users/sign-in">signIn</a>
-    <% } else { %>
-    <p> Hey <%= user.name %> </p>
-    <a href="/users/sign-out">signOut</a>
-    <% } %>
-</header>
+    <div id="head-container">
+        <p id="company-name">Codeial</p>
+        <div id="sign-information">
+            <% if(!locals.user) { %>
+            <a href="/users/sign-up">signUp</a>
+            <a href="/users/sign-in">signIn</a>
+            <% } else { %>
+            <a href="/users/profile"> Hey <%= user.name %> </a>
+            <a href="/users/sign-out">signOut</a>
+            <% } %>
+        </div>
+    </div>
+</header> 

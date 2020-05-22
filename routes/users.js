@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const userController = require('../controllers/userController');
+
 router.get('/profile',passport.checkAuthentication,userController.profile);
 
 //can also be done in controller
@@ -30,5 +31,7 @@ router.post('/login', passport.authenticate(
 ) ,userController.login);
 
 router.get('/sign-out',userController.signOut);
+
+
 
 module.exports = router;

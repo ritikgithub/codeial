@@ -1,6 +1,7 @@
-body
-{
-    text-align:center;
-    margin:0px;
-    background-color: red;
-}
+body {
+  margin: 0px; }
+  body #main-content {
+    height: 90%;
+    background-color: white; }
+    body #main-content h1 {
+      margin: 0; }

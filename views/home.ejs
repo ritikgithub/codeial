@@ -1,6 +1,23 @@
 <link rel="stylesheet" type="text/css" href="css/home.css">
-<h1>
-    Its home page
-    <a href="/users/sign-in">SignIn</a>
-    <a href="/users/sign-up">SignUp</a>
-</h1>
+<% if(locals.user) { %>
+<div id="posts-form-container">
+    <form id="post-submit-form" action="/posts/create" method="post">
+        <textarea name="content" id="post-content" placeholder="Enter Text" cols="30" rows="3"></textarea>
+        <button type="submit">Post</button>
+    </form>
+</div> 
+
+<% } %>
+
+<div id="posts-container">
+    <ul id="posts">
+        <% for(let post of posts) { %>
+            <li>
+                <p><%= post.user.name %></p>
+                <p><%= post.content %></p>
+            </li>
+        <% } %>
+    </ul>
+
+
+</div>
