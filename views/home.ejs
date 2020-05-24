@@ -15,9 +15,32 @@
             <li>
                 <p><%= post.user.name %></p>
                 <p><%= post.content %></p>
+                <% let postId = post.id %>
+                <% if(locals.user && post.user.id == locals.user.id) { %>
+                <a href="posts/delete?postId=<%=postId%>">Delete Post</a>
+                <%}%>
+                <% if(locals.user) { %> 
+                <form id="comment" action="/posts/comments/create" method="POST">
+                    <textarea name="comment" id="comment-id" cols="30" rows="2"></textarea>
+                    <input type="hidden" name="postId" value=<%= post._id %>>
+                    <button type="submit">Comment</button>
+                </form>
+                <% } %>
+                <div id="show-comments-container">
+                    <ul>
+                        <li>
+                           <% for(let comment of post.comments) { %> 
+                                <p> Comment done by: <%= comment.user.name %></p>
+                                <p> <%= comment.content %></p>
+                                <% if(locals.user && (comment.user.id == locals.user.id || post.user.id == locals.user.id)){ %>
+                                <a href="posts/comments/delete/<%= comment.id %>">Delete Comment</a>
+                                <% } %>
+                            <% } %>
+                        </li>
+                    </ul>
+                </div>
             </li>
         <% } %>
     </ul>
-
-
+    
 </div>
