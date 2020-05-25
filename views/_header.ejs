@@ -6,7 +6,7 @@
             <a href="/users/sign-up">signUp</a>
             <a href="/users/sign-in">signIn</a>
             <% } else { %>
-            <a href="/users/profile"> Hey <%= user.name %> </a>
+            <a href="/users/profile/<%=locals.user.id%>"> Hey <%= user.name %> </a>
             <a href="/users/sign-out">signOut</a>
             <% } %>
         </div>
