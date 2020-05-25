@@ -19,7 +19,7 @@ module.exports.create = function(req,res){
 
 module.exports.delete = function(req,res){
     let postId = req.query.postId;
-    Post.findById(postId,function(err,post){
+      Post.findById(postId,function(err,post){
         if(err){console.log("Error in deleting the post");return}
         if(post){
             if(post.user != req.user.id){
@@ -33,5 +33,6 @@ module.exports.delete = function(req,res){
         });
     }
     });
+    
     }
     
