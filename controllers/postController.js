@@ -1,38 +1,36 @@
 const Post = require('../models/post.js');
 const Comment = require('../models/comment');
 
-module.exports.create = function(req,res){
-    
-    Post.create({
+module.exports.create = async function(req,res){
+    try{
+    let post = await Post.create({
         content: req.body.content,
         user: req.user._id
-    },function(err,post){
-        if(err){
-            console.log("Error");
-            return;
-        }
-        console.log("New post added");
-        return res.redirect('/');
     });
+    console.log("New post added");
+    return res.redirect('/');
+}
+catch{
+    console.log("Error in creating post ",err);
+}
    
 }
 
-module.exports.delete = function(req,res){
+module.exports.delete = async function(req,res){
+    try{
     let postId = req.query.postId;
-      Post.findById(postId,function(err,post){
-        if(err){console.log("Error in deleting the post");return}
-        if(post){
-            if(post.user != req.user.id){
-               console.log("You are not authorised to delete this");
-                return res.redirect('back');
-            }
-            post.remove();
-            Comment.deleteMany({post:post._id},function(err){
-                if(err){console.log("Error in deleting the comment of post");return}
-                return res.redirect('back');
-        });
+     let post = await Post.findById(postId);
+     if(post){
+        if(post.user != req.user.id){
+            console.log("You are not authorised to delete this");
+            return res.redirect('back');
+        }
+        post.remove();
+        let comments = await Comment.deleteMany({post:post._id});
+        return res.redirect('back');
+    }    
     }
-    });
-    
+    catch(err){
+        console.log("Error in deleting the post",err);
     }
-    
+}

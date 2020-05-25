@@ -19,14 +19,14 @@ module.exports.create = async function(req,res){
     }
 }
 
-module.exports.delete = function(req,res){
+module.exports.delete = async function(req,res){
     let commentId = req.params.id;
     try{
-    let comment = Comment.findById(commentId).populate('post').exec();
+    let comment = await Comment.findById(commentId).populate('post').exec();
      if(comment){
-        if(comment.user==req.user.id || comment.post.user == req.user.id){
+        if(comment.user==req.user.id  || comment.post.user == req.user.id){
             comment.remove();
-            let post = Post.findByIdAndUpdate(comment.post,{ $pull :{comments:commentId} });
+            let post = await Post.findByIdAndUpdate(comment.post,{ $pull :{comments:commentId} });
             return res.redirect('back');
         }
         else{
