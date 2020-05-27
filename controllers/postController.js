@@ -7,11 +7,13 @@ module.exports.create = async function(req,res){
         content: req.body.content,
         user: req.user._id
     });
-    console.log("New post added");
+    
+    req.flash('success','Post Published');
     return res.redirect('/');
 }
-catch{
-    console.log("Error in creating post ",err);
+catch(err){
+    req.flash('error',err);
+    return res.redirect('back');
 }
    
 }
@@ -22,15 +24,17 @@ module.exports.delete = async function(req,res){
      let post = await Post.findById(postId);
      if(post){
         if(post.user != req.user.id){
-            console.log("You are not authorised to delete this");
+            req.flash('error','You are not authorized to delete the post');
             return res.redirect('back');
         }
         post.remove();
         let comments = await Comment.deleteMany({post:post._id});
+        req.flash('success','Post deleted');
         return res.redirect('back');
     }    
     }
     catch(err){
-        console.log("Error in deleting the post",err);
+        req.flash('error',err);
+        return res.redirect('back');
     }
 }

@@ -4,7 +4,7 @@ const Post = require('../models/post');
 module.exports.create = async function(req,res){
     try{
    let post = await Post.findById(req.body.postId);
-    let comment =   await Comment.create({
+    let comment =  await  Comment.create({
             content: req.body.comment,
             post: req.body.postId, 
             user: req.user._id
@@ -12,10 +12,12 @@ module.exports.create = async function(req,res){
     console.log("Comment Added");
     post.comments.push(comment);
     post.save();
+    req.flash('success','Comment created');
     return res.redirect('back');
         }
     catch(err){
-        console.log("Error in creating comment",err);
+       req.flash('error',err);
+       return res.redirect('back');
     }
 }
 
@@ -27,19 +29,19 @@ module.exports.delete = async function(req,res){
         if(comment.user==req.user.id  || comment.post.user == req.user.id){
             comment.remove();
             let post = await Post.findByIdAndUpdate(comment.post,{ $pull :{comments:commentId} });
+            req.flash('success','Comment deleted');
             return res.redirect('back');
         }
         else{
-            console.log("You are not authorized to delete this comment");
+            req.flash('error','Not authorized to delete this comment');
             return res.redirect('back');
         }
     }
     }
     catch(err){
-        console.log("Error in deleting the comment ",err);
+        req.flash('error',err);
+        return res.redirect('back');
     }
-           
-        
 }
 
 

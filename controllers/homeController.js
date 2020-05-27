@@ -17,6 +17,7 @@ module.exports.home = async function(req,res){
 }
     catch(err)
     {
-        console.log("Error in passing values to home",err);
+        req.flash('error',err);
+        return res.redirect('back');
     }
 }

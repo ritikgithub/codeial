@@ -1,19 +1,46 @@
 <html>
     <head>
         <title><%= title %></title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css">
+       
         <link rel="stylesheet" type="text/css" href="/css/layout.css">
         <link rel="stylesheet" type="text/css" href="/css/header.css">
         <link rel="stylesheet" type="text/css" href="/css/footer.css">
-
         <%- style %>
     </head>
     <body>
         <%- include('_header') %>
+      
         <main id="main-content">
         <%- body %>
     </main>
         <%- include('_footer') %>
 
         <%- script %>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"></script>
+
+        <% if(flash.success && flash.success.length>0)  { %> 
+        <script>
+               new Noty({
+                   theme:'relax',
+                    text:"<%= flash.success %>",
+                    type:'success',
+                    timeout:1000
+                }).show(); 
+         </script> 
+        <% } %>
+
+        <% if(flash.error && flash.error.length>0)  { %> 
+            <script>
+                   new Noty({
+                       theme:'relax',
+                        text:"<%= flash.error %>",
+                        type:'error',
+                        timeout:1000
+                    }).show(); 
+             </script> 
+            <% } %>
+    
     </body> 
 </html>

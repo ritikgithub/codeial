@@ -10,7 +10,8 @@ module.exports.profile = async function(req,res){
     });
     }
     catch(err){
-        console.log("Error in passing profile ",err);
+       req.flash('error',err);
+       return res.redirect('back');
     }
    
 };
@@ -31,14 +32,14 @@ module.exports.create  = async function(req,res){
     try{
     if(req.body.password!=req.body.confirm_password)
     {
-        console.log("passwords should be same")
+        req.flash('error',"passwords should be same");
         return res.redirect('back');
     }
     
     let user = await User.findOne({email:req.body.email});
     if(user)
     {
-        console.log("User cant be added due to same email");
+        req.flash('error',"User cant be added due to same email");
         return res.redirect('back');
     }
     let newUser = await User.create({
@@ -46,21 +47,24 @@ module.exports.create  = async function(req,res){
         password: req.body.password,
         name:req.body.name
     });
-    console.log("User Added");
+    req.flash('success',"User Added");
     return res.redirect('/users/sign-in');
     }
     catch(err){
-        console.log("User cant be added ",err);
+        req.flash('error',err);
+        res.redirect('back');
     }
 }
 
 module.exports.login = function(req,res){
-    console.log(req.user.id,"#####");
+
+    req.flash('success',"You have successfully Logged in");
     return res.redirect("/users/profile/"+req.user.id);
 };
 
 module.exports.signOut = function(req,res){
     req.logout();
+    req.flash('success',"You have logged out");
     return res.redirect('/users/sign-in');
 };
 
