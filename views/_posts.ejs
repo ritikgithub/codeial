@@ -7,13 +7,13 @@
             <a class="delete-post-button" href="posts/delete?postId=<%=postId%>">Delete Post</a>
             <%}%>
             <% if(locals.user) { %> 
-            <form id="comment" action="/posts/comments/create" method="POST">
-                <textarea name="comment" id="comment-id" cols="30" rows="2"></textarea>
+            <form  action="/posts/comments/create" method="POST">
+                <textarea name="comment" cols="30" rows="2"></textarea>
                 <input type="hidden" name="postId" value=<%= post._id %>>
                 <button type="submit">Comment</button>
             </form>
             <% } %>
-            <div id="show-comments-container">
+            <div class="show-comments-container">
                 <ul>
                     <% for(comment of post.comments) { %>
                          <%- include('_comments') %>

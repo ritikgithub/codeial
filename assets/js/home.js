@@ -1,5 +1,12 @@
 {
- 
+    let noty = function(message){
+        new Noty({
+            theme:'relax',
+            text: message,
+            type:'success',
+            timeout:1000
+        }).show(); 
+    }
 
     let showPost = function(post){
 
@@ -12,7 +19,7 @@
             <input type="hidden" name="postId" value=${post._id} >
             <button type="submit">Comment</button>
         </form>
-        <div id="show-comments-container">
+        <div class="show-comments-container">
             <ul>
                
             </ul>
@@ -34,13 +41,9 @@
                 success: function(data){
                    let newPost = showPost(data.data.post);
                         $("#posts").prepend(newPost);
-                        new Noty({
-                            theme:'relax',
-                            text: data.message,
-                            type:'success',
-                            timeout:1000
-                        }).show(); 
-                   deletePost($(newPost).find(".delete-post-button"));
+                        noty(data.message);
+                        deletePost($(newPost).find(".delete-post-button"));
+                        createComment(newPost);
                 },error : function(err){
                     console.log("Error",err);
                 }
@@ -53,18 +56,13 @@
     let deletePost = function(deleteLink){
         deleteLink.click(function(event){
             event.preventDefault();
+            console.log(deleteLink.attr('href'));
             $.ajax({
                 type:'get',
                 url: deleteLink.attr('href'),
                 success: function(data){
                    $(`#post-${data.data.postId}`).remove();
-                        new Noty({
-                            theme:'relax',
-                            text: data.message,
-                            type:'success',
-                            timeout:1000
-                        }).show(); 
-                
+                   noty(data.message);
                 },error : function(err){
                     console.log("Error",err);
                 }
@@ -72,8 +70,64 @@
     });
 }
 
+    
+
+    let showComment = function(comment){
+       return  $(`<li id="comment-${comment._id}">
+        <p> Comment done by: ${ comment.user.name }</p>
+        <p> ${ comment.content }</p>
+        <a class="comment-delete-button" href="posts/comments/delete/${ comment._id }">Delete Comment</a>
+    </li>`)
+    };
+
+    let deleteComment = function(deleteCommentLink){
+        deleteCommentLink.click(function(event){
+            event.preventDefault();
+            $.ajax({
+                type:'get',
+                url: $(this).attr("href"),
+                success: function(data){
+                    $(`#comment-${data.data.commentId}`).remove();
+                    noty(data.message);
+                }, error: function(err){
+                    console.log("kjb",err);
+                }
+            });
+
+
+        });
+
+    };
+
+    let createComment = function(post){
+        $(post).find('form').submit(function(event){
+            event.preventDefault();
+            $.ajax({
+                type:'post',
+                url:'/posts/comments/create',
+                data:  $(this).serialize() ,
+                success: function(data){
+                    let newComment = showComment(data.data.comment);
+                    $(post).find(".show-comments-container > ul").prepend(newComment);
+                    deleteComment(newComment.find(".comment-delete-button"));
+                    noty(data.message);
+                }, error: function(err){
+                    console.log(err.responseText);
+                }
+            });
+        });
+    };
+
+    
+
+
     for(let post of $("#posts").children()){
         deletePost($(post).find(".delete-post-button"));
+        createComment($(post)); 
+        for(let comment of $(post).find(".show-comments-container > ul").children()){
+            deleteComment($(comment).find(".comment-delete-button"));
+        }
     }
+
 
 }

@@ -8,7 +8,7 @@ module.exports.create = async function(req,res){
         user: req.user._id
     });
 
-    let populatedPost  = await Post.findById(post.id).populate('user');
+    let populatedPost  = await Post.findById(post.id).populate('user','name');
     
     if (req.xhr) {
         return res.json({

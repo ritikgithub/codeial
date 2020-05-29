@@ -12,6 +12,17 @@ module.exports.create = async function(req,res){
     console.log("Comment Added");
     post.comments.push(comment);
     post.save();
+    let populatedComment = await Comment.findById(comment.id).populate('user','name');
+
+    if(req.xhr){
+    return res.status(200).json({
+        data: {
+            comment: populatedComment
+        },
+        message: "Comment Created"
+    });
+}
+
     req.flash('success','Comment created');
     return res.redirect('back');
         }
@@ -29,6 +40,16 @@ module.exports.delete = async function(req,res){
         if(comment.user==req.user.id  || comment.post.user == req.user.id){
             comment.remove();
             let post = await Post.findByIdAndUpdate(comment.post,{ $pull :{comments:commentId} });
+
+            if(req.xhr){
+                return res.status(200).json({
+                    data: {
+                        commentId: commentId
+                    },
+                    message: "Comment Deleted"
+                });
+            }
+
             req.flash('success','Comment deleted');
             return res.redirect('back');
         }
