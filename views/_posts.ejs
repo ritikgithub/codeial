@@ -1,10 +1,10 @@
 
-        <li>
+        <li id="post-<%=post._id%>">
             <p><%= post.user.name %></p>
             <p><%= post.content %></p>
             <% let postId = post.id %>
             <% if(locals.user && post.user.id == locals.user.id) { %>
-            <a href="posts/delete?postId=<%=postId%>">Delete Post</a>
+            <a class="delete-post-button" href="posts/delete?postId=<%=postId%>">Delete Post</a>
             <%}%>
             <% if(locals.user) { %> 
             <form id="comment" action="/posts/comments/create" method="POST">
