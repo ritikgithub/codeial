@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const userController = require('../controllers/userController');
+const User = require('../models/user');
 
 router.get('/profile/:id',passport.checkAuthentication,userController.profile);
 
@@ -32,6 +33,15 @@ router.post('/login', passport.authenticate(
 
 router.get('/sign-out',userController.signOut);
 
-router.post('/update',passport.checkAuthentication,userController.update);
+router.post('/update',passport.checkAuthentication,function(req,res,next){
+
+    User.uploadAvatar(req,res,function(err){
+        if(err){
+            console.log("Multer Errro",err);
+            return;
+        }
+        next();
+    });
+},userController.update);
 
 module.exports = router;

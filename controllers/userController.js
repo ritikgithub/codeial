@@ -1,4 +1,6 @@
 const User = require('../models/user.js');
+const path = require('path');
+const fs = require('fs');
 
 module.exports.profile = async function(req,res){
     console.log(req.params.id);
@@ -72,6 +74,19 @@ module.exports.update = async function(req,res){
     try{
     if(req.body.userId == req.user.id){
         let user = await User.findByIdAndUpdate(req.body.userId,{name:req.body.name,email:req.body.email});
+        if(req.file){
+
+            
+
+            if(user.avatar){
+                fs.unlinkSync(path.join(__dirname,'..', user.avatar));
+            }
+
+            user.avatar = User.avatarPath + '/' + req.file.filename;
+            user.save();
+        }
+
+
         return res.redirect('back');
     }
     else
