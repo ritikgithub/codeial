@@ -14,7 +14,7 @@
         <p> ${ post.user.name }</p>
         <p> ${ post.content }</p>
         <a class="delete-post-button" href="posts/delete?postId=${post._id}">Delete Post</a>
-        <form id="comment" action="/posts/comments/create" method="POST">
+        <form id="comment" action="/comments/create" method="POST">
             <textarea name="comment" id="comment-id" cols="30" rows="2"></textarea>
             <input type="hidden" name="postId" value=${post._id} >
             <button type="submit">Comment</button>
@@ -76,7 +76,7 @@
        return  $(`<li id="comment-${comment._id}">
         <p> Comment done by: ${ comment.user.name }</p>
         <p> ${ comment.content }</p>
-        <a class="comment-delete-button" href="posts/comments/delete/${ comment._id }">Delete Comment</a>
+        <a class="comment-delete-button" href="/comments/delete/${ comment._id }">Delete Comment</a>
     </li>`)
     };
 
@@ -104,7 +104,7 @@
             event.preventDefault();
             $.ajax({
                 type:'post',
-                url:'/posts/comments/create',
+                url:'/comments/create',
                 data:  $(this).serialize() ,
                 success: function(data){
                     let newComment = showComment(data.data.comment);

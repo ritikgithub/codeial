@@ -7,7 +7,7 @@
             <a class="delete-post-button" href="posts/delete?postId=<%=postId%>">Delete Post</a>
             <%}%>
             <% if(locals.user) { %> 
-            <form  action="/posts/comments/create" method="POST">
+            <form  action="/comments/create" method="POST">
                 <textarea name="comment" cols="30" rows="2"></textarea>
                 <input type="hidden" name="postId" value=<%= post._id %>>
                 <button type="submit">Comment</button>
