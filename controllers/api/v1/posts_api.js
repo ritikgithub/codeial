@@ -23,25 +23,13 @@ module.exports.delete = async function(req,res){
      let post = await Post.findById(postId);
      
      if(post){
-        // if(post.user != req.user.id){
-        //     req.flash('error','You are not authorized to delete the post');
-        //     return res.redirect('back');
-        // }
+        if(post.user != req.user.id){
+            return res.json({
+                message:"Unauthorized to delete this post"
+            });
+        }
         post.remove();
         let comments = await Comment.deleteMany({post:post._id});
-
-        // if (req.xhr) {
-        //     return res.status(200).json({
-        //         data: {
-        //             postId: postId
-        //         },
-        //         message: "Post deleted"
-        //      });
-        // }
-
-
-        
-        // req.flash('success','Post deleted');
         return res.json(200,{
             message:"Post Deleted"
         });
