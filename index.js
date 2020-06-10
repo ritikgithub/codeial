@@ -5,6 +5,7 @@ const db= require('./config/mongoose.js');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 const passportJWT = require('./config/passport-jwt-strategy');
+const passportgoogle = require('./config/passport-google-oauth2-strategy');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const expressLayouts = require('express-ejs-layouts');
@@ -64,4 +65,5 @@ app.listen(port,function(err) {
     }
     console.log(`Server is running on port : ${port}`);
 });
+
 
