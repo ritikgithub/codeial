@@ -13,6 +13,7 @@ const cookieParser = require('cookie-parser');
 const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
 const middleware = require('./config/middleware');
+const nodemailer = require('./config/nodemailer');
 
 app.use(sassMiddleware({
     src:'./assets/scss',
