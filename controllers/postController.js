@@ -1,5 +1,6 @@
 const Post = require('../models/post.js');
 const Comment = require('../models/comment');
+const Like = require('../models/like');
 
 module.exports.create = async function(req,res){
     try{
@@ -44,6 +45,8 @@ module.exports.delete = async function(req,res){
         }
         post.remove();
         let comments = await Comment.deleteMany({post:post._id});
+        await Like.deleteMany({onModel:'Post' , likeable: post._id});
+        await Like.deleteMany({likeable: {$in: post.comments}});
 
         if (req.xhr) {
             return res.status(200).json({
@@ -64,4 +67,43 @@ module.exports.delete = async function(req,res){
         req.flash('error',err);
         return res.redirect('back');
     }
+}
+
+module.exports.addOrRemoveLike = async function(req,res){
+
+    if(req.user) {
+    
+    let postId = req.query.postId;
+
+    let like = await Like.findOne({onModel: 'Post' , user : req.user.id , likeable : postId});
+   
+    
+    if( !like ) {
+        let newLike = await Like.create({
+            user: req.user._id,
+            onModel: 'Post',
+            likeable: postId
+        });
+
+        await Post.findByIdAndUpdate(postId,{ $push : {likes : newLike._id} });
+    }
+
+    else {
+        like.remove();
+        await Post.findByIdAndUpdate(postId,{ $pull :{likes : like._id} });
+    }
+
+    let post  = await Post.findById(postId).populate('likes');
+    
+    if(req.xhr){
+    return res.json(200,{
+        data: {
+            post: post
+        },
+        message: "Post Like successfully updated"
+    });
+    }
+
+    }
+
 }

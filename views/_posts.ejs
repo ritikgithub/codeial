@@ -4,8 +4,10 @@
             <p><%= post.content %></p>
             <% let postId = post.id %>
             <% if(locals.user && post.user.id == locals.user.id) { %>
+           
             <a class="delete-post-button" href="posts/delete?postId=<%=postId%>">Delete Post</a>
-            <%}%>
+            
+            <% } %>
             <% if(locals.user) { %> 
             <form  action="/comments/create" method="POST">
                 <textarea name="comment" cols="30" rows="2"></textarea>
@@ -13,6 +15,23 @@
                 <button type="submit">Comment</button>
             </form>
             <% } %>
+            <div class="post-likes">
+                <% if(locals.user) { %> 
+                    <% if (post.likes.find(function(like){
+                        return like.user == locals.user.id;
+                    }) ) { %>
+                        <a href="/posts/add-delete-like?postId=<%=post._id%>" class="add-delete-like-button"><i class="far fa-thumbs-up color-blue"></i></a>
+                     <% } 
+                    else { %> 
+                        <a href="/posts/add-delete-like?postId=<%=post._id%>" class="add-delete-like-button"><i class="far fa-thumbs-up"></i></a>
+                        <% } %>
+                
+                <% } %>
+                <span class="post-likes-no"><%= post.likes.length %></span>
+                <span>Likes</span>
+            </div>
+            
+
             <div class="show-comments-container">
                 <ul>
                     <% for(comment of post.comments) { %>

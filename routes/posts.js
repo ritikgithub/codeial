@@ -5,7 +5,7 @@ const postController = require('../controllers/postController');
 
 router.post('/create',passport.checkAuthentication,postController.create);
 
-
+router.get('/add-delete-like',passport.checkAuthentication,postController.addOrRemoveLike);
 
 router.get('/delete',passport.checkAuthentication,postController.delete);
 

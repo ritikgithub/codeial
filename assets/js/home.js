@@ -1,3 +1,6 @@
+// const { eventNames } = require("../../models/post");
+// const { get } = require("mongoose");
+
 {
     let noty = function(message){
         new Noty({
@@ -19,6 +22,13 @@
             <input type="hidden" name="postId" value=${post._id} >
             <button type="submit">Comment</button>
         </form>
+
+        <div class="post-likes">
+                <a href="/posts/add-delete-like?postId=${post._id}" class="add-delete-like-button"><i class="far fa-thumbs-up"></i></a>
+                <span class="post-likes-no">0</span>
+                <span>Likes</span>
+        </div>
+
         <div class="show-comments-container">
             <ul>
                
@@ -43,7 +53,9 @@
                         $("#posts").prepend(newPost);
                         noty(data.message);
                         deletePost($(newPost).find(".delete-post-button"));
+                        addDeleteLikeOnPost(newPost);
                         createComment(newPost);
+
                 },error : function(err){
                     console.log("Error",err);
                 }
@@ -76,6 +88,11 @@
        return  $(`<li id="comment-${comment._id}">
         <p> Comment done by: ${ comment.user.name }</p>
         <p> ${ comment.content }</p>
+        <div class="comment-likes">
+         <a href="/comments/add-delete-like?commentId=${comment._id}" class="add-delete-like-button-comment"><i class="far fa-thumbs-up"></i></a> 
+        <span class="comment-likes-no">0</span>
+        <span>Likes</span>
+        </div>
         <a class="comment-delete-button" href="/comments/delete/${ comment._id }">Delete Comment</a>
     </li>`)
     };
@@ -110,6 +127,7 @@
                     let newComment = showComment(data.data.comment);
                     $(post).find(".show-comments-container > ul").prepend(newComment);
                     deleteComment(newComment.find(".comment-delete-button"));
+                    addDeleteLikeOnComment(newComment);
                     noty(data.message);
                 }, error: function(err){
                     console.log(err.responseText);
@@ -119,15 +137,53 @@
     };
 
     
+    let addDeleteLikeOnPost  = function(post){
+        post.find(".add-delete-like-button").click(function(event){
+            event.preventDefault();
+            $.ajax({
+                type: 'get',
+                url : $(this).attr('href'),
+                success: function(data){
+                    console.log(post.find(".post-likes-no"));
+                    post.find(".post-likes-no").text(data.data.post.likes.length);
+                    post.find(".add-delete-like-button i").toggleClass("color-blue");
+                }, error : function(){
+                    console.log("Error ",err); return;
+                }
+            });
+        });
+    }
+
+    let addDeleteLikeOnComment  = function(comment){
+        comment.find(".add-delete-like-button-comment").click(function(event){
+            event.preventDefault();
+            $.ajax({
+                type: 'get',
+                url : $(this).attr('href'),
+                success: function(data){
+                    comment.find(".comment-likes-no").text(data.data.comment.likes.length);
+                    comment.find(".add-delete-like-button-comment i").toggleClass("color-blue");
+                }, error : function(){
+                    console.log("Error ",err); return;
+                }
+            });
+        });
+    }
 
 
     for(let post of $("#posts").children()){
         deletePost($(post).find(".delete-post-button"));
         createComment($(post)); 
+        addDeleteLikeOnPost($(post));
         for(let comment of $(post).find(".show-comments-container > ul").children()){
             deleteComment($(comment).find(".comment-delete-button"));
+            addDeleteLikeOnComment($(comment));
         }
     }
 
 
+
+
+
 }
+

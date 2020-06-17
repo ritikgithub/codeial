@@ -1,9 +1,24 @@
- 
-        
-  
+
         <li id="comment-<%=comment._id%>">
             <p> Comment done by: <%= comment.user.name %></p>
             <p> <%= comment.content %></p>
+            
+            <div class="comment-likes">
+                <% if(locals.user) { %> 
+                    <% if (comment.likes.find(function(like){
+                        return like.user == locals.user.id;
+                    }) ) { %>
+                        <a href="/comments/add-delete-like?commentId=<%=comment._id%>" class="add-delete-like-button-comment"><i class="far fa-thumbs-up color-blue"></i></a>
+                     <% } 
+                    else { %> 
+                        <a href="/comments/add-delete-like?commentId=<%=comment._id%>" class="add-delete-like-button-comment"><i class="far fa-thumbs-up"></i></a>
+                        <% } %>
+                
+                <% } %>
+                <span class="comment-likes-no"><%= comment.likes.length %></span>
+                <span>Likes</span>
+            </div>
+
             <% if(locals.user && (comment.user.id == locals.user.id || post.user.id == locals.user.id)){ %>
             <a class="comment-delete-button" href="/comments/delete/<%= comment.id %>">Delete Comment</a>
             <% } %>
