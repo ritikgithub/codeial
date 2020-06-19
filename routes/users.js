@@ -53,4 +53,12 @@ router.get('/auth/google/callback', passport.authenticate('google',{
 }),userController.login);
 
 
+router.post('/forgot-password',userController.forgotPassword);
+
+//it is to get the form to change password
+router.get('/reset-password',userController.resetPassword);
+
+//it is to change password by submiting the form
+router.post('/change-password',userController.changePassword);
+
 module.exports = router;

@@ -1,6 +1,9 @@
 const User = require('../models/user.js');
 const path = require('path');
 const fs = require('fs');
+const jwt = require('jsonwebtoken');
+const  forgotPasswordMailer = require('../mailers/forgot_password_mailer.js');
+const UserToken = require('../models/userToken');
 
 module.exports.profile = async function(req,res){
     console.log(req.params.id);
@@ -97,4 +100,72 @@ catch(err){
 }
     
 
+}
+
+
+module.exports.forgotPassword = async function(req,res){
+
+    let emailId = req.body.email;
+    let user = await User.findOne({email: emailId});
+    if(!user){
+        req.flash('error','Email does not exist');
+        return res.redirect('back');
+    }
+
+    let token = jwt.sign(user.toJSON(),'codeial',{expiresIn: "1000000"});
+
+    UserToken.create({
+        token: token,
+        user: user._id,
+        isValid: true
+    });
+
+    let forgotLink = 'http://localhost:8000/users/reset-password?token='+token;
+
+    forgotPasswordMailer.forgotPasswordEmail(forgotLink,emailId);
+    req.flash('success',"Email has been sent");
+    return res.redirect('back');
+
+}
+
+module.exports.resetPassword = async function(req,res){
+    let token  = req.query.token;
+   let userToken = await UserToken.findOne({token:token});
+   if(!(userToken && userToken.isValid)){
+      req.flash('error','May be token expires');
+       return res.redirect('/');
+   }
+
+   return res.render('resetPassword',{
+       userToken: userToken,
+       title:"reset password"
+   });
+
+}
+
+module.exports.changePassword = async function(req,res){
+
+    let token  = req.query.token;
+    let userToken = await UserToken.findOne({token:token});
+    if(!(userToken && userToken.isValid)){
+        req.flash('error','May be token expires');
+         return res.redirect('/');
+     }
+    
+    if(req.body.password != req.body.confirm_password){
+        req.flash('error','Password does not match');
+        return res.redirect('back');
+    }
+
+    
+
+    let user   = await User.findById(userToken.user);
+    user.password = req.body.password;
+    user.save();
+
+    userToken.isValid = false;
+    userToken.save();
+    
+    req.flash('success','password successfully changed');
+    return res.redirect('/users/sign-in');
 }

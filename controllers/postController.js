@@ -76,7 +76,8 @@ module.exports.addOrRemoveLike = async function(req,res){
     let postId = req.query.postId;
 
     let like = await Like.findOne({onModel: 'Post' , user : req.user.id , likeable : postId});
-   
+    
+    let post  = await Post.findById(postId).populate('likes');
     
     if( !like ) {
         let newLike = await Like.create({
@@ -84,16 +85,20 @@ module.exports.addOrRemoveLike = async function(req,res){
             onModel: 'Post',
             likeable: postId
         });
-
-        await Post.findByIdAndUpdate(postId,{ $push : {likes : newLike._id} });
+      
+        post.likes.push(newLike._id);
+        post.save();
+        
     }
 
     else {
         like.remove();
-        await Post.findByIdAndUpdate(postId,{ $pull :{likes : like._id} });
+        post.likes.pull(like._id);
+        post.save();
+        
     }
 
-    let post  = await Post.findById(postId).populate('likes');
+    
     
     if(req.xhr){
     return res.json(200,{
