@@ -15,6 +15,15 @@ const flash = require('connect-flash');
 const middleware = require('./config/middleware');
 const nodemailer = require('./config/nodemailer');
 
+const  http = require('http').createServer(app);
+
+http.listen(5000,function(err){
+    if(err){console.log("error", err);return;}
+    console.log('Listening on port number 5000');
+});
+
+const chatServerConfig = require('./config/chatting_server')(http);
+
 app.use(sassMiddleware({
     src:'./assets/scss',
     dest:'./assets/css',

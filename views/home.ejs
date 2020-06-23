@@ -33,3 +33,15 @@
     </ul>
 </div>
 
+<% if(locals.user) { %>
+    <%- include('_chatbox') %>
+<% } %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script src="js/chatting_browser.js"></script>
+
+<% if(locals.user) { %> 
+<script>
+    new chatBox('<%= locals.user.email %>');
+</script>
+<% } %>

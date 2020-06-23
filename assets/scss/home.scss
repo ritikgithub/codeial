@@ -12,3 +12,53 @@ h1
 a{
    color:inherit;
 }
+
+#chat-box{
+
+    width:250px;
+    height:300px;
+    border: 1px dotted black;
+    overflow: auto;
+    position:fixed;
+    bottom:0px;
+    right:0px;
+    background-color: lightgray;
+    padding:0px;
+
+    #input-message-container{
+        position: fixed;
+        bottom: 0px;
+        margin:0px;
+        width:100%;
+
+        #input-message{
+            margin:0px;
+            input{
+                width:17%; //isme doubt hai fixed pr aur absolute pr
+            }
+        }
+    }
+
+    #messages{
+        list-style: none;
+        padding:0px;
+       
+        li{
+            padding:10px;
+            width:80%;
+        }
+
+        .self-message{
+            text-align: right;
+           
+        }
+
+        .other-message{
+           text-align: left;
+         
+        }
+    }
+
+    
+    
+}

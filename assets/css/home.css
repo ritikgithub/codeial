@@ -7,3 +7,33 @@ h1 {
 
 a {
   color: inherit; }
+
+#chat-box {
+  width: 250px;
+  height: 300px;
+  border: 1px dotted black;
+  overflow: auto;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  background-color: lightgray;
+  padding: 0px; }
+  #chat-box #input-message-container {
+    position: fixed;
+    bottom: 0px;
+    margin: 0px;
+    width: 100%; }
+    #chat-box #input-message-container #input-message {
+      margin: 0px; }
+      #chat-box #input-message-container #input-message input {
+        width: 17%; }
+  #chat-box #messages {
+    list-style: none;
+    padding: 0px; }
+    #chat-box #messages li {
+      padding: 10px;
+      width: 80%; }
+    #chat-box #messages .self-message {
+      text-align: right; }
+    #chat-box #messages .other-message {
+      text-align: left; }
