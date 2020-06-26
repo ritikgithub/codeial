@@ -2,10 +2,11 @@ const passport = require('passport');
 const StrategyJwt = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../models/user');
+const env = require('./environment');
 
 var opts = {}
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = 'codeial';
+opts.secretOrKey = env.jwt_secret;
 
 passport.use(new StrategyJwt(opts,function(jwtPayload,done){
     User.findById(jwtPayload._id,function(err,user){

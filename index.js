@@ -14,8 +14,9 @@ const sassMiddleware = require('node-sass-middleware');
 const flash = require('connect-flash');
 const middleware = require('./config/middleware');
 const nodemailer = require('./config/nodemailer');
-
+const path = require('path');
 const  http = require('http').createServer(app);
+const env = require('./config/environment');
 
 http.listen(5000,function(err){
     if(err){console.log("error", err);return;}
@@ -25,8 +26,8 @@ http.listen(5000,function(err){
 const chatServerConfig = require('./config/chatting_server')(http);
 
 app.use(sassMiddleware({
-    src:'./assets/scss',
-    dest:'./assets/css',
+    src: path.join(env.static_files_path,'scss'),
+    dest: path.join(env.static_files_path,'css'),
     debug:false,
     outputStyle:'extended',
     prefix:'/css'
@@ -35,7 +36,7 @@ app.use(sassMiddleware({
 app.use(cookieParser());
 app.use(express.urlencoded());
 app.use(expressLayouts);
-app.use(express.static('./assets'));
+app.use(express.static(env.static_files_path));
 app.use('/uploads',express.static('./uploads'));
 
 app.set('layout extractStyles',true);
@@ -45,7 +46,7 @@ app.set('views','./views');
 
 app.use(session({
     name:'codeial',
-    secret:'blahsomething',
+    secret: env.session_cookie_key,
     saveUninitialized:false,
     resave:false,
     cookie:{

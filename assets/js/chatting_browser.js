@@ -10,6 +10,10 @@ class chatBox {
     connectionHandler(){
         let self = this;
 
+        //acknowledging the connection on client side
+        self.socket.on('connect',function(){
+            console.log('Connection established between sockets');
+        });
 
         self.socket.emit('join_room',{
             email : self.user_email,
@@ -35,7 +39,7 @@ class chatBox {
                 let newMessage  = $('<li>');
 
                 newMessage.append(`<span>${data.message}</span>`);
-                
+
                 if(data.email == self.user_email)
                  newMessage.addClass('self-message');
                 else  
