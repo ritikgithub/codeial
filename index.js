@@ -17,6 +17,7 @@ const nodemailer = require('./config/nodemailer');
 const path = require('path');
 const  http = require('http').createServer(app);
 const env = require('./config/environment');
+const logger = require('morgan');
 
 http.listen(5000,function(err){
     if(err){console.log("error", err);return;}
@@ -66,6 +67,7 @@ app.use(passport.setAuthenticatedUser)
 app.use(flash());
 app.use(middleware.customMware);
 
+app.use(logger(env.morgan.mode, {stream: env.morgan.stream}));
 app.use('/',require('./routes'));
 
 app.listen(port,function(err) {
