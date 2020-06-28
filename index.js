@@ -26,6 +26,7 @@ http.listen(5000,function(err){
 
 const chatServerConfig = require('./config/chatting_server')(http);
 
+if(env.name=="development"){
 app.use(sassMiddleware({
     src: path.join(env.static_files_path,'scss'),
     dest: path.join(env.static_files_path,'css'),
@@ -33,6 +34,7 @@ app.use(sassMiddleware({
     outputStyle:'extended',
     prefix:'/css'
 }));
+}
 
 app.use(cookieParser());
 app.use(express.urlencoded());
