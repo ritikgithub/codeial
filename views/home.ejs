@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" href="css/home.css">
-<script src="js/home.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=assetPath('css/home.css')%>">
+<script src="<%=assetPath('js/home.js')%>"></script>
 <% if(locals.user) { %>
 <div id="posts-form-container">
     <form id="post-submit-form" action="/posts/create" method="post">
@@ -38,7 +38,7 @@
 <% } %>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-<script src="js/chatting_browser.js"></script>
+<script src="<%=assetPath('js/chatting_browser.js')%>"></script>
 
 <% if(locals.user) { %> 
 <script>

@@ -1,7 +1,10 @@
 {
-  "footer.css": "footer-6cd4df53c1.css",
-  "header.css": "header-b43602a20f.css",
-  "home.css": "home-e432e3ae80.css",
-  "layout.css": "layout-8aeebc0e02.css",
-  "user_profile.css": "user_profile-1894758408.css"
+  "css/footer.css": "css/footer-6cd4df53c1.css",
+  "css/header.css": "css/header-b43602a20f.css",
+  "css/home.css": "css/home-e432e3ae80.css",
+  "css/layout.css": "css/layout-8aeebc0e02.css",
+  "css/user_profile.css": "css/user_profile-1894758408.css",
+  "js/chatting_browser.js": "js/chatting_browser-bf3c83b270.js",
+  "js/home.js": "js/home-589294ff1f.js",
+  "js/signIn.js": "js/signIn-676529c836.js"
 }

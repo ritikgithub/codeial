@@ -1,1 +1,39 @@
-h1{color:#fff;background-color:aqua}.color-blue{color:blue}a{color:inherit}#chat-box{width:250px;height:300px;border:1px dotted #000;overflow:auto;position:fixed;bottom:0;right:0;background-color:#d3d3d3;padding:0}#chat-box #input-message-container{position:fixed;bottom:0;margin:0;width:100%}#chat-box #input-message-container #input-message{margin:0}#chat-box #input-message-container #input-message input{width:17%}#chat-box #messages{list-style:none;padding:0}#chat-box #messages li{padding:10px;width:80%}#chat-box #messages .self-message{text-align:right}#chat-box #messages .other-message{text-align:left}
+h1 {
+  color: white;
+  background-color: aqua; }
+
+.color-blue {
+  color: blue; }
+
+a {
+  color: inherit; }
+
+#chat-box {
+  width: 250px;
+  height: 300px;
+  border: 1px dotted black;
+  overflow: auto;
+  position: fixed;
+  bottom: 0px;
+  right: 0px;
+  background-color: lightgray;
+  padding: 0px; }
+  #chat-box #input-message-container {
+    position: fixed;
+    bottom: 0px;
+    margin: 0px;
+    width: 100%; }
+    #chat-box #input-message-container #input-message {
+      margin: 0px; }
+      #chat-box #input-message-container #input-message input {
+        width: 17%; }
+  #chat-box #messages {
+    list-style: none;
+    padding: 0px; }
+    #chat-box #messages li {
+      padding: 10px;
+      width: 80%; }
+    #chat-box #messages .self-message {
+      text-align: right; }
+    #chat-box #messages .other-message {
+      text-align: left; }

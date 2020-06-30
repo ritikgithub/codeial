@@ -18,7 +18,7 @@ const path = require('path');
 const  http = require('http').createServer(app);
 const env = require('./config/environment');
 const logger = require('morgan');
-
+const viewHelper = require('./config/view_helper')(app);
 http.listen(5000,function(err){
     if(err){console.log("error", err);return;}
     console.log('Listening on port number 5000');
@@ -35,6 +35,8 @@ app.use(sassMiddleware({
     prefix:'/css'
 }));
 }
+
+
 
 app.use(cookieParser());
 app.use(express.urlencoded());

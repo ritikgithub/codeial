@@ -1,1 +1,20 @@
-#head-container{display:flex;background-color:blue;height:70px;justify-content:space-between}#head-container>p{color:#fff;font-size:2rem;font-weight:1000;margin-left:20px;margin-top:20px}#head-container #sign-information{margin-right:10px;display:flex}#head-container #sign-information a{display:inline-block;color:#fff;margin:25px 5px;text-decoration:none;font-size:1.2rem}
+#head-container {
+  display: flex;
+  background-color: blue;
+  height: 70px;
+  justify-content: space-between; }
+  #head-container > p {
+    color: white;
+    font-size: 2rem;
+    font-weight: 1000;
+    margin-left: 20px;
+    margin-top: 20px; }
+  #head-container #sign-information {
+    margin-right: 10px;
+    display: flex; }
+    #head-container #sign-information a {
+      display: inline-block;
+      color: white;
+      margin: 25px 5px;
+      text-decoration: none;
+      font-size: 1.2rem; }

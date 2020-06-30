@@ -1,1 +1,7 @@
-body{margin:0}body #main-content{height:90%;background-color:#fff}body #main-content h1{margin:0}
+body {
+  margin: 0px; }
+  body #main-content {
+    height: 90%;
+    background-color: white; }
+    body #main-content h1 {
+      margin: 0; }
