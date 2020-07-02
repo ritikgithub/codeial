@@ -120,7 +120,7 @@ module.exports.forgotPassword = async function(req,res){
         isValid: true
     });
 
-    let forgotLink = 'http://localhost:8000/users/reset-password?token='+token;
+    let forgotLink = 'http://3.128.184.46:8000/users/reset-password?token='+token;
 
     forgotPasswordMailer.forgotPasswordEmail(forgotLink,emailId);
     req.flash('success',"Email has been sent");

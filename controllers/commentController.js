@@ -18,11 +18,11 @@ module.exports.create = async function(req,res){
     post.save();
     let populatedComment = await Comment.findById(comment.id).populate('user','name email');
     
-    // let job = jobs.createJob('emails', populatedComment) .save(function(err){
-    //     if(err){console.log("Error in creaing job ",err); return;}
-    //     console.log(job.id);
-    // });
-    // commentsMailer.newComment(populatedComment);
+    let job = jobs.createJob('emails', populatedComment) .save(function(err){
+        if(err){console.log("Error in creaing job ",err); return;}
+        console.log(job.id);
+    });
+    commentsMailer.newComment(populatedComment);
     
     if(req.xhr){
     return res.status(200).json({
