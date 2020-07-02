@@ -23,7 +23,7 @@ http.listen(5000,function(err){
     if(err){console.log("error", err);return;}
     console.log('Listening on port number 5000');
 });
-
+console.log("Environemnt is ",env.name);
 const chatServerConfig = require('./config/chatting_server')(http);
 
 if(env.name=="development"){
