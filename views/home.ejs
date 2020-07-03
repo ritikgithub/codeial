@@ -42,6 +42,6 @@
 
 <% if(locals.user) { %> 
 <script>
-    new chatBox('<%= locals.user.email %>');
+    new chatBox('<%= locals.user.email %>','<%= env_name %>');
 </script>
 <% } %>

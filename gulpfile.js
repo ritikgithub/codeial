@@ -65,4 +65,4 @@ gulp.task('clean:asset',function(done){
 gulp.task('build',gulp.series('clean:asset','css','js','images'),function(done){
     console.log('Building project...');
     done();
-});
+});                                 

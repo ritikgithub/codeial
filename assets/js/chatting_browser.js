@@ -1,11 +1,15 @@
 class chatBox {
-    constructor(email){
-        this.user_email = email,
-        this.socket = io.connect('http://3.128.184.46:5000');
+    constructor(email,env_name){
+        this.user_email = email;
+        if(env_name == "production")
+             this.socket = io.connect('http://3.128.184.46:5000');
+        else
+             this.socket = io.connect('http://localhost:5000');
 
         if(this.user_email) //dont know why this condition is used
              this.connectionHandler();
     }
+    
 
     connectionHandler(){
         let self = this;

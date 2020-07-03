@@ -39,7 +39,7 @@ app.use(sassMiddleware({
 
 
 app.use(cookieParser());
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:false}));
 app.use(expressLayouts);
 app.use(express.static(env.static_files_path));
 app.use('/uploads',express.static('./uploads'));

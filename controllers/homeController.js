@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Post = require('../models/post');
 const Chat_message = require('../models/chat_message');
-
+const env = require('../config/environment');
 
 
 module.exports.home = async function(req,res){
@@ -13,7 +13,8 @@ module.exports.home = async function(req,res){
         title: "codeial | home",
         posts:posts,
         users: users,
-        chat_messages:chat_messages
+        chat_messages:chat_messages,
+        env_name : env.name
     });
 }
     catch(err)
