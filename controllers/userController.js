@@ -4,14 +4,19 @@ const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const  forgotPasswordMailer = require('../mailers/forgot_password_mailer.js');
 const UserToken = require('../models/userToken');
+const Friend_request = require('../models/friend_request');
+
 
 module.exports.profile = async function(req,res){
-    console.log(req.params.id);
     try{
-    let user = await User.findById(req.params.id);
+    let user = await User.findById(req.params.id).populate('friends');
+    let friend_requests_received = await Friend_request.find({receiver: req.user._id }).populate('sender');
+    let friend_requests_sent = await Friend_request.find({sender: req.user._id });
     return res.render('user_profile',{
         title: 'user-profile',
-        profile_user: user
+        profile_user: user,
+        friend_requests_received: friend_requests_received,
+        friend_requests_sent: friend_requests_sent
     });
     }
     catch(err){

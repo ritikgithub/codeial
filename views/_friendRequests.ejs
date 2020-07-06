@@ -1,0 +1,16 @@
+<div id="friend-requests-container">
+    <ul>
+    <% if(locals.user.id == profile_user.id) { %> 
+        <h2>Friend Requests</h2>
+        <% for(request of friend_requests_received) { %> 
+            <li>
+               <a href="/users/profile/<%=request.sender._id%>"> <%= request.sender.name %> </a> 
+                <a href="/friend-request/accept?sender_id=<%=request.sender._id%>"><button>Accept</button></a>
+                <a href="/friend-request/reject?sender_id=<%=request.sender._id%>"><button>Reject</button></a>
+            </li>
+        <% } %>
+    <% } %>
+    </ul>
+
+</div>
+

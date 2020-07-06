@@ -20,8 +20,8 @@
 </div>
 
 
-<div id="friends-list">
-    <h2>Friends</h2>
+<div id="Users-list">
+    <h2>Users</h2>
     <ul>
         <% if (locals.user) { %>
         <% for(let profileUser of users) { %>
@@ -32,6 +32,8 @@
         <%}%>
     </ul>
 </div>
+
+
 
 <% if(locals.user) { %>
     <%- include('_chatbox') %>

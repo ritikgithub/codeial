@@ -44,8 +44,11 @@ passport.checkAuthentication = function (req, res, next){
 
 passport.setAuthenticatedUser = function(req, res, next){
     if(req.isAuthenticated()){
+        // await User.findById(req.user._id).populate('friends').exec(function(user){
+        //     res.locals.user = user;
+        // });
         res.locals.user = req.user;
-    }
+     }
     next();
 };
 

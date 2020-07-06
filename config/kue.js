@@ -1,4 +1,4 @@
-const kue = require('kue');
-const jobs = kue.createQueue();
+// const kue = require('kue');
+// const jobs = kue.createQueue();
 
-module.exports = jobs;
+// module.exports = jobs;

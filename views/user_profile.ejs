@@ -21,3 +21,36 @@
     </form>
 </div>
 <% } %>
+
+<% if(profile_user.id == locals.user.id){
+}
+
+else if (friend_requests_sent.find(function(friend_request_sent){
+    return friend_request_sent.receiver == profile_user.id;
+}) ) { %>
+    <button>Requested </button>
+<% }
+
+else if (profile_user.friends.find(function(friend){
+    return friend.id == locals.user.id;
+})) {
+}
+
+else { %>
+<a href="/friend-request/send?profile_user_id=<%=profile_user._id%>">Add Friend</a>
+<% } %>
+
+
+<%- include('_friendRequests') %>
+
+
+<div id="friends-list">
+    <h2> Friends </h2>
+    <ul>
+        <% for(friend of profile_user.friends) { %> 
+            <li>
+                <a href="/users/profile/<%=friend._id%>"><%= friend.name %></a>
+            </li>    
+        <% } %>
+    </ul>
+</div>

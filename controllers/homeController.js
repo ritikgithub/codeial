@@ -6,9 +6,15 @@ const env = require('../config/environment');
 
 module.exports.home = async function(req,res){
     try{
-    let posts = await Post.find({}).sort('-createdAt').populate('user').populate('likes').populate({path:'comments',populate:[{path:'user'},{path:'likes'}],options: { sort: '-createdAt'}});
+    let posts = await Post.find({$or:[{user : req.user._id}, {user: { $in:req.user.friends }}]})
+       .sort('-createdAt')
+       .populate('user')
+       .populate('likes')
+       .populate({path:'comments',populate:[{path:'user'},{path:'likes'}],options: { sort: '-createdAt'}});
     let users = await User.find({});
     let chat_messages = await Chat_message.find({}).populate('user');
+    
+   
     return res.render('home',{
         title: "codeial | home",
         posts:posts,

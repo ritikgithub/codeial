@@ -12,4 +12,6 @@ router.use('/comments',require('./comments'));
 
 router.use('/api',require('./api'));
 
+router.use('/friend-request',require('./friend-request'));
+
 module.exports = router;
