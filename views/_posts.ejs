@@ -2,6 +2,9 @@
         <li id="post-<%=post._id%>">
             <p><%= post.user.name %></p>
             <p><%= post.content %></p>
+            <% if(post.img_path) { %> 
+                 <img src="<%=post.img_path%>" width="400px">
+            <% } %>
             <% let postId = post.id %>
             <% if(locals.user && post.user.id == locals.user.id) { %>
            

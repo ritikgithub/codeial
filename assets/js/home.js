@@ -16,6 +16,7 @@
         let newPost = $(`<li id="post-${post._id}">
         <p> ${ post.user.name }</p>
         <p> ${ post.content }</p>
+        
         <a class="delete-post-button" href="posts/delete?postId=${post._id}">Delete Post</a>
         <form id="comment" action="/comments/create" method="POST">
             <textarea name="comment" id="comment-id" cols="30" rows="2"></textarea>
@@ -35,6 +36,9 @@
             </ul>
         </div>
     </li>`);
+    if(post.img_path) { 
+        $(`<img src="${post.img_path}" width="400px">`).insertAfter($(newPost.find('p')[1]))
+   } 
     return newPost;   
     
 
@@ -44,10 +48,14 @@
     let postCreation = function(){
         $('#post-submit-form').on('submit',function(event){
             event.preventDefault();
+            var formData = new FormData($(this)[0]);
+
             $.ajax({
                 type:'post',
                 url: '/posts/create',
-                data: $(this).serialize(),
+                data: formData,
+                contentType: false,
+                processData: false, 
                 success: function(data){
                    let newPost = showPost(data.data.post);
                         $("#posts").prepend(newPost);

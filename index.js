@@ -42,8 +42,8 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended:false}));
 app.use(expressLayouts);
 app.use(express.static(env.static_files_path));
-app.use('/uploads',express.static('./uploads'));
-
+app.use('/uploads/users',express.static('./uploads'));
+app.use('/uploads/posts',express.static('./uploads/posts'));
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 app.set('view engine', 'ejs');
@@ -64,7 +64,6 @@ app.use(session({
         console.log(err || 'connect mongodb setup ok');
     })
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser)

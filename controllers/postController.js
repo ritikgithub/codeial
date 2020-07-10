@@ -1,6 +1,8 @@
 const Post = require('../models/post.js');
 const Comment = require('../models/comment');
 const Like = require('../models/like');
+const fs = require('fs');
+const path = require('path');
 
 module.exports.create = async function(req,res){
     try{
@@ -8,13 +10,18 @@ module.exports.create = async function(req,res){
         content: req.body.content,
         user: req.user._id
     });
-
-    let populatedPost  = await Post.findById(post.id).populate('user','name');
+//some confusion of populated posts while adding img-path
+    post  = await Post.findById(post.id).populate('user','name');
     
+    if(req.file){
+        post.img_path = '/uploads/posts/' + req.file.filename;
+        post.save();
+    }
+
     if (req.xhr) {
         return res.json({
            data: {
-               post:populatedPost
+               post:post
            },
            message: "Post created!"
         });
@@ -43,8 +50,12 @@ module.exports.delete = async function(req,res){
             req.flash('error','You are not authorized to delete the post');
             return res.redirect('back');
         }
-        post.remove();
+       
         let comments = await Comment.deleteMany({post:post._id});
+        if(post.img_path){
+            fs.unlinkSync(path.join(__dirname,'..',post.img_path));
+        }
+        post.remove();
         await Like.deleteMany({onModel:'Post' , likeable: post._id});
         await Like.deleteMany({likeable: {$in: post.comments}});
 

@@ -1,9 +1,11 @@
 <link rel="stylesheet" type="text/css" href="<%=assetPath('css/home.css')%>">
+
 <script src="<%=assetPath('js/home.js')%>"></script>
 <% if(locals.user) { %>
 <div id="posts-form-container">
-    <form id="post-submit-form" action="/posts/create" method="post">
+    <form id="post-submit-form" action="/posts/create" method="post"  enctype="multipart/form-data">
         <textarea name="content" id="post-content" placeholder="Enter Text" cols="30" rows="3"></textarea>
+       <input type="file" name="postImage">
         <button type="submit">Post</button>
     </form>
 </div> 
