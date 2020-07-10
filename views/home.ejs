@@ -9,7 +9,7 @@
 </div> 
 
 <% } %>
-
+<% if(locals.user) { %> 
 <div id="posts-container">
     <ul id="posts">
         <% for( post of posts) { %>
@@ -19,6 +19,20 @@
             
 </div>
 
+<% } %>
+
+<% if(locals.user) { %> 
+<div id="friends-list">
+    <h2> Friends </h2>
+    <ul>
+        <% for(friend of populate_user.friends) { %> 
+            <li>
+                <a href="/chatting/get-chat-box?sender=<%=locals.user._id%>&receiver=<%=friend._id%>"><%= friend.name %></a>
+            </li>    
+        <% } %>
+    </ul>
+</div>
+<% } %>
 
 <div id="Users-list">
     <h2>Users</h2>
@@ -34,16 +48,13 @@
 </div>
 
 
-
-<% if(locals.user) { %>
-    <%- include('_chatbox') %>
-<% } %>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-<script src="<%=assetPath('js/chatting_browser.js')%>"></script>
-
 <% if(locals.user) { %> 
 <script>
-    new chatBox('<%= locals.user.email %>','<%= env_name %>');
+      var user_email = '<%= locals.user.email %>';
+      var env_name = '<%= locals.env_name %>';
 </script>
 <% } %>
+<script src="<%=assetPath('js/chatting_browser.js')%>"></script>
+<script src="<%=assetPath('js/chatting_box.js')%>"></script>
+
