@@ -1,9 +1,10 @@
 <link rel="stylesheet" type="text/css" href="<%=assetPath('css/home.css')%>">
+<script src=""></script>
 
-<script src="<%=assetPath('js/home.js')%>"></script>
+<%- include('_searchbox') %>
 <% if(locals.user) { %>
 <div id="posts-form-container">
-    <form id="post-submit-form" action="/posts/create" method="post"  enctype="multipart/form-data">
+    <form id="post-submit-form" acti<%=assetPath('js/home.js')%>on="/posts/create" method="post"  enctype="multipart/form-data">
         <textarea name="content" id="post-content" placeholder="Enter Text" cols="30" rows="3"></textarea>
        <input type="file" name="postImage">
         <button type="submit">Post</button>
@@ -59,4 +60,5 @@
 <% } %>
 <script src="<%=assetPath('js/chatting_browser.js')%>"></script>
 <script src="<%=assetPath('js/chatting_box.js')%>"></script>
+<script src="<%=assetPath('js/searchBox.js')%>"></script>
 

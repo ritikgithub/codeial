@@ -16,4 +16,6 @@ router.use('/friend-request',require('./friend-request'));
 
 router.use('/chatting',require('./chatting'));
 
+router.use('/search',require('./search'));
+
 module.exports = router;
