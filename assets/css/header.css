@@ -1,5 +1,10 @@
+.height-test {
+  height: 70px; }
+
 #head-container {
   display: flex;
+  position: fixed;
+  width: 100%;
   background-color: blue;
   height: 70px;
   justify-content: space-between; }

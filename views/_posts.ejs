@@ -1,25 +1,25 @@
-
+<% if(locals.user) { %> 
         <li id="post-<%=post._id%>">
-            <p><%= post.user.name %></p>
-            <p><%= post.content %></p>
-            <% if(post.img_path) { %> 
-                 <img src="<%=post.img_path%>" width="400px">
-            <% } %>
+            
+            <p class="bradley-underline"><%= post.user.name %></p>
+            <p class="fontsize-1point2"><%= post.content %></p>
+
             <% let postId = post.id %>
             <% if(locals.user && post.user.id == locals.user.id) { %>
            
-            <a class="delete-post-button" href="posts/delete?postId=<%=postId%>">Delete Post</a>
+            <a class="delete-post-button" href="posts/delete?postId=<%=postId%>"><i class="far fa-trash-alt"></i></a>
             
             <% } %>
-            <% if(locals.user) { %> 
-            <form  action="/comments/create" method="POST">
-                <textarea name="comment" cols="30" rows="2"></textarea>
-                <input type="hidden" name="postId" value=<%= post._id %>>
-                <button type="submit">Comment</button>
-            </form>
+
+            <% if(post.img_path) { %> 
+                 <img src="<%=post.img_path%>" width="600px">
+                 <br><br>
             <% } %>
+            
+
+            
             <div class="post-likes">
-                <% if(locals.user) { %> 
+                
                     <% if (post.likes.find(function(like){
                         return like.user == locals.user.id;
                     }) ) { %>
@@ -29,18 +29,28 @@
                         <a href="/posts/add-delete-like?postId=<%=post._id%>" class="add-delete-like-button"><i class="far fa-thumbs-up"></i></a>
                         <% } %>
                 
-                <% } %>
                 <span class="post-likes-no"><%= post.likes.length %></span>
-                <span>Likes</span>
             </div>
+
+            <form  action="/comments/create" method="POST">
+                <textarea placeholder="comment here.." name="comment" cols="30" rows="1"></textarea>
+                <input type="hidden" name="postId" value=<%= post._id %>>
+                <button type="submit">Comment</button>
+            </form>
+
+            
+            
             
 
             <div class="show-comments-container">
+                <h4>Comments</h4>
                 <ul>
                     <% for(comment of post.comments) { %>
                          <%- include('_comments') %>
                     <% } %>
                 </ul>
             </div>
+
+            
         </li>
- 
+ <% } %>

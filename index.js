@@ -42,7 +42,7 @@ app.use(cookieParser());
 app.use(express.urlencoded({extended:false}));
 app.use(expressLayouts);
 app.use(express.static(env.static_files_path));
-app.use('/uploads/users',express.static('./uploads'));
+app.use('/uploads/users',express.static('./uploads/users'));
 app.use('/uploads/posts',express.static('./uploads/posts'));
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);

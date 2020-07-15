@@ -1,5 +1,63 @@
-body
-{
-    color:pink;
-    background-color: brown;
+#main-content {
+    padding: 20px;
+    overflow: auto;
+    #profile {
+        text-align:center;
+        margin-top: 30px;
+        color: maroon;
+        border-bottom : 1px solid  lightgray;
+        img{
+            border-radius: 50%;
+            display:inline-block;
+        }
+    }
+
+    #update-form {
+        margin: 10px 10px;
+        border-bottom : 1px solid lightgray;
+        input {
+            padding: 5px;
+            margin: 5px;
+        }
+    }
+
+    #friend-button {
+        margin: 10px;
+        a {
+            padding: 5px;
+        }
+    }
+    
+    #friends-list {
+        ul {
+            padding : 0px 10px;
+            list-style: none;
+            font-size: 1.2rem;  
+
+            li {
+                margin: 5px;
+                a {
+                text-decoration: none;
+                }
+            }
+
+        }
+    }
+
+    #friend-requests-container {
+        border-bottom : 1px solid lightgray;
+        ul {
+            padding : 0px 10px;
+            list-style: none;
+            font-size: 1.2rem;  
+
+            li {
+                margin: 5px;
+                a {
+                text-decoration: none;
+                }
+            }
+
+        }   
+    }
 }

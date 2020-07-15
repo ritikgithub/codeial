@@ -1,17 +1,15 @@
 <link rel="stylesheet" type="text/css" href="<%=assetPath('css/user_profile.css')%>">
 
-<img src="<%= profile_user.avatar %>" width="100px">
-
-
-<h1>
-    hey <%= profile_user.name %> Welcome to codeial !!
-    <br>
-    Email : <%= profile_user.email %>
-</h1>
-
+<div id="profile">
+<img src="<%= profile_user.avatar %>" width="200px" height="200px">
+<h2>
+    <%= profile_user.name %> 
+</h2>
+</div>
 <% if(profile_user.id == locals.user.id) { %> 
-<h2>Update Profile</h2>
+
 <div id="update-form">
+    <h3>Update Profile</h3>
     <form action="/users/update" method="post" enctype="multipart/form-data">
         <input type="text" placeholder="Enter Name" name="name" value="<%=profile_user.name %>" required>
         <input type="email" placeholder="Enter Email" name="email" value="<%=profile_user.email %>" required>
@@ -21,6 +19,8 @@
     </form>
 </div>
 <% } %>
+
+<div id="friend-button">
 
 <% if(profile_user.id == locals.user.id){
 }
@@ -37,15 +37,16 @@ else if (profile_user.friends.find(function(friend){
 }
 
 else { %>
-<a href="/friend-request/send?profile_user_id=<%=profile_user._id%>">Add Friend</a>
+<a href="/friend-request/send?profile_user_id=<%=profile_user._id%>"><button><i class="fas fa-plus"></i> Add Friend</button></a>
 <% } %>
 
+</div>
 
 <%- include('_friendRequests') %>
 
 
 <div id="friends-list">
-    <h2> Friends </h2>
+    <h3> Friends </h3>
     <ul>
         <% for(friend of profile_user.friends) { %> 
             <li>

@@ -1,7 +1,6 @@
 h1
 {
     color:white;
-    background-color: aqua;
 }
 
 .color-blue{
@@ -62,10 +61,132 @@ a{
 }
 
 #search-box{
-    width: 250px;
-    border: 1px solid;
+  margin: 10px 10px;
+  input {
+      padding: 10px;
+      width: 300px;
+  }  
+  ul {
+      list-style: none;
+      padding: 10px;
 
+      li {
+          margin: 5px;
+      }
 
+      a {
+          text-decoration: none;
+          
+      }
+  }
+  
 }
+
+
+#post-friend-container {
+    display: flex;
+    height: 100%;
+
+    #redundant {
+        width: 25%;
+        border-right: 1px solid gray;
+       
+    }
+
+    
+    #all-posts {
+        width: 50%;
+        overflow:scroll;
+        #posts-form-container {
+          border-bottom: 2px double rgb(146, 145, 145);
+          textarea {
+              display: block;
+              padding: 5px;
+              font-size: 1.3rem;
+          }
+
+          input {
+              margin:10px;
+              padding: 5px;
+          }
+    
+        }
+
+        #posts-container {
+            #posts {
+                list-style: none;
+                padding: 0px;
+                width:100%;
+                li:not(:last-child){
+                    border-bottom: 2px solid gray;
+                }
+                li{
+                    padding: 20px 40px;
+                    p {
+                        width: 95%;
+                        display: inline-block;
+                    }
+                    .bradley-underline {
+                        font-family: Bradley Hand, cursive;
+                        text-decoration: underline;
+                    }
+                    .fontsize1point0 {
+                        font-size: 0.8rem;
+                    }
+                    .fontsize-1point2 {
+                        font-size: 1.2rem;
+                    }
+
+                    form {
+                        margin: 20px;
+                        textarea {
+                            padding: 4px 6px;
+                        }
+                        
+                    }
+                    
+                    .show-comments-container {
+                        ul {
+                            list-style: none;
+                            padding: 10px;
+                            li {
+                                padding: 0px 20px;
+                            }
+                            li:not(:last-child){
+                                border-bottom: 1px solid gray;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #friends-list {
+        position: absolute;
+        height: 90%;
+        right: 150px;
+        padding-left: 20px;
+        border-left: 1px solid;
+        overflow:auto;
+        ul{
+            list-style: none;
+            padding-left: 10px;
+
+            li {
+                margin: 15px 10px;
+            }
+
+            a{
+                text-decoration: none;
+                font-size: 1.2rem;
+            }
+        }
+    }
+
+    
+}
+
+
 
 

@@ -1,3 +1,39 @@
-body {
-  color: pink;
-  background-color: brown; }
+#main-content {
+  padding: 20px;
+  overflow: auto; }
+  #main-content #profile {
+    text-align: center;
+    margin-top: 30px;
+    color: maroon;
+    border-bottom: 1px solid  lightgray; }
+    #main-content #profile img {
+      border-radius: 50%;
+      display: inline-block; }
+  #main-content #update-form {
+    margin: 10px 10px;
+    border-bottom: 1px solid lightgray; }
+    #main-content #update-form input {
+      padding: 5px;
+      margin: 5px; }
+  #main-content #friend-button {
+    margin: 10px; }
+    #main-content #friend-button a {
+      padding: 5px; }
+  #main-content #friends-list ul {
+    padding: 0px 10px;
+    list-style: none;
+    font-size: 1.2rem; }
+    #main-content #friends-list ul li {
+      margin: 5px; }
+      #main-content #friends-list ul li a {
+        text-decoration: none; }
+  #main-content #friend-requests-container {
+    border-bottom: 1px solid lightgray; }
+    #main-content #friend-requests-container ul {
+      padding: 0px 10px;
+      list-style: none;
+      font-size: 1.2rem; }
+      #main-content #friend-requests-container ul li {
+        margin: 5px; }
+        #main-content #friend-requests-container ul li a {
+          text-decoration: none; }

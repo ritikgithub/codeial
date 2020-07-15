@@ -1,18 +1,20 @@
 <link rel="stylesheet" type="text/css" href="<%=assetPath('css/home.css')%>">
-<script src=""></script>
+<script src="<%=assetPath('js/home.js')%>"></script>
 
-<%- include('_searchbox') %>
+
 <% if(locals.user) { %>
+<div id="post-friend-container">
+<div id="redundant">
+    <%- include('_searchbox') %>
+</div>
+<div id="all-posts">
 <div id="posts-form-container">
     <form id="post-submit-form" action="/posts/create" method="post"  enctype="multipart/form-data">
-        <textarea name="content" id="post-content" placeholder="Enter Text" cols="30" rows="3"></textarea>
+        <textarea name="content" id="post-content" placeholder="Enter Text" cols="58" rows="3"></textarea>
        <input type="file" name="postImage">
         <button type="submit">Post</button>
     </form>
 </div> 
-
-<% } %>
-<% if(locals.user) { %> 
 <div id="posts-container">
     <ul id="posts">
         <% for( post of posts) { %>
@@ -21,10 +23,8 @@
     </ul>
             
 </div>
+</div>
 
-<% } %>
-
-<% if(locals.user) { %> 
 <div id="friends-list">
     <h2> Friends </h2>
     <ul>
@@ -35,9 +35,11 @@
         <% } %>
     </ul>
 </div>
+
+</div>
 <% } %>
 
-<div id="Users-list">
+<!-- <div id="Users-list">
     <h2>Users</h2>
     <ul>
         <% if (locals.user) { %>
@@ -48,8 +50,10 @@
         <%}%>
         <%}%>
     </ul>
-</div>
-
+</div> -->
+<!-- <div id="h">
+    dfsdf
+</div> -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 <% if(locals.user) { %> 

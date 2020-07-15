@@ -14,31 +14,36 @@
     let showPost = function(post){
 
         let newPost = $(`<li id="post-${post._id}">
-        <p> ${ post.user.name }</p>
-        <p> ${ post.content }</p>
+        <p class="bradley-underline"> ${ post.user.name }</p>
+        <p class="fontsize-1point2"> ${ post.content }</p>
         
-        <a class="delete-post-button" href="posts/delete?postId=${post._id}">Delete Post</a>
+        <a class="delete-post-button" href="posts/delete?postId=${post._id}"><i class="far fa-trash-alt"></i></a>
+       
+        <div class="post-likes">
+        <a href="/posts/add-delete-like?postId=${post._id}" class="add-delete-like-button"><i class="far fa-thumbs-up"></i></a>
+        <span class="post-likes-no">0</span>
+        </div>
+
+        
         <form id="comment" action="/comments/create" method="POST">
-            <textarea name="comment" id="comment-id" cols="30" rows="2"></textarea>
+            <textarea name="comment" id="comment-id" cols="30" rows="1"></textarea>
             <input type="hidden" name="postId" value=${post._id} >
             <button type="submit">Comment</button>
         </form>
 
-        <div class="post-likes">
-                <a href="/posts/add-delete-like?postId=${post._id}" class="add-delete-like-button"><i class="far fa-thumbs-up"></i></a>
-                <span class="post-likes-no">0</span>
-                <span>Likes</span>
-        </div>
-
+       
         <div class="show-comments-container">
+          <h4>Comments</h4>
             <ul>
                
             </ul>
         </div>
     </li>`);
     if(post.img_path) { 
-        $(`<img src="${post.img_path}" width="400px">`).insertAfter($(newPost.find('p')[1]))
-   } 
+        $(`<img src="${post.img_path}" width="600px"><br><br>`).insertAfter($(newPost.find('a')[0]));
+        
+        
+    } 
     return newPost;   
     
 
@@ -94,14 +99,15 @@
 
     let showComment = function(comment){
        return  $(`<li id="comment-${comment._id}">
-        <p> Comment done by: ${ comment.user.name }</p>
+        <p class="bradley-underline fontsize1point0">  ${ comment.user.name }</p>
         <p> ${ comment.content }</p>
+        <a class="comment-delete-button" href="/comments/delete/${ comment._id }"><i class="far fa-trash-alt"></i></a>
         <div class="comment-likes">
          <a href="/comments/add-delete-like?commentId=${comment._id}" class="add-delete-like-button-comment"><i class="far fa-thumbs-up"></i></a> 
         <span class="comment-likes-no">0</span>
-        <span>Likes</span>
+       
         </div>
-        <a class="comment-delete-button" href="/comments/delete/${ comment._id }">Delete Comment</a>
+        
     </li>`)
     };
 
