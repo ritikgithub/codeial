@@ -1,0 +1,17 @@
+#sign-up-container {
+  width: 350px;
+  margin: auto;
+  border: 1px solid;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 25vh;
+  padding-left: 20px;
+  padding-right: 10px; }
+  #sign-up-container #sign-up input {
+    width: 300px;
+    display: block;
+    margin-bottom: 18px;
+    padding: 8px; }
+  #sign-up-container #sign-up button {
+    padding: 3px; }

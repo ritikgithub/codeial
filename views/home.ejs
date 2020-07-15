@@ -4,7 +4,7 @@
 <%- include('_searchbox') %>
 <% if(locals.user) { %>
 <div id="posts-form-container">
-    <form id="post-submit-form" acti<%=assetPath('js/home.js')%>on="/posts/create" method="post"  enctype="multipart/form-data">
+    <form id="post-submit-form" action="/posts/create" method="post"  enctype="multipart/form-data">
         <textarea name="content" id="post-content" placeholder="Enter Text" cols="30" rows="3"></textarea>
        <input type="file" name="postImage">
         <button type="submit">Post</button>

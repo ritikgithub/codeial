@@ -1,0 +1,37 @@
+#sign-in-container {
+    width:350px;
+    margin:auto;
+    border: 1px solid;
+    position: absolute;
+    left:0px;
+    right:0px;
+    top:30vh;
+    padding-left:20px;
+    padding-right: 10px;
+
+    #sign-up {
+        input {
+            width:300px;
+            display: block;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        button {
+            padding: 5px;
+        }
+
+        a {
+           position: relative;
+           left: 150px; 
+        }
+    }
+
+    #forgot-password-div {
+        input {
+            width:300px;
+            display: block;
+            margin-bottom: 15px;
+            padding: 7px;
+        }
+    }
+}
