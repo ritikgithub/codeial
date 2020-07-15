@@ -1,0 +1,1 @@
+$("#search-box input").keyup((function(e){let o=$(this).val();$.ajax({url:"/search",type:"post",data:{text:o},success:function(e){$("#search-box ul").remove();let o=$("<ul>");for(let a of e)$(`<li><a href="/users/profile/${a._id}">${a.name}</a></li>`).appendTo(o);o.appendTo($("#search-box"))},error:function(e){console.log(e)}})}));

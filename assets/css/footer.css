@@ -1,9 +1,1 @@
-#footer-container {
-  display: flex;
-  background-color: grey;
-  color: white; }
-  #footer-container ul {
-    list-style: none; }
-    #footer-container ul a {
-      color: white;
-      text-decoration: none; }
+#footer-container{display:flex;background-color:grey;color:#fff}#footer-container ul{list-style:none}#footer-container ul a{color:#fff;text-decoration:none}

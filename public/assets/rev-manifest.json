@@ -1,10 +1,15 @@
 {
+  "css/chatbox.css": "css/chatbox-47fa65e55f.css",
   "css/footer.css": "css/footer-6cd4df53c1.css",
-  "css/header.css": "css/header-b43602a20f.css",
-  "css/home.css": "css/home-e432e3ae80.css",
-  "css/layout.css": "css/layout-8aeebc0e02.css",
-  "css/user_profile.css": "css/user_profile-1894758408.css",
-  "js/chatting_browser.js": "js/chatting_browser-4318688768.js",
-  "js/home.js": "js/home-589294ff1f.js",
-  "js/signIn.js": "js/signIn-676529c836.js"
+  "css/header.css": "css/header-8c6ca21939.css",
+  "css/home.css": "css/home-79e200f68e.css",
+  "css/layout.css": "css/layout-db5cc49def.css",
+  "css/sign-in.css": "css/sign-in-d560646c56.css",
+  "css/sign-up.css": "css/sign-up-27d4917bef.css",
+  "css/user_profile.css": "css/user_profile-397e07e6d3.css",
+  "js/chatting_box.js": "js/chatting_box-66eb052445.js",
+  "js/chatting_browser.js": "js/chatting_browser-6f8fa01324.js",
+  "js/home.js": "js/home-10dd6f0f75.js",
+  "js/searchBox.js": "js/searchBox-d5c458ec67.js",
+  "js/signIn.js": "js/signIn-57200834c2.js"
 }

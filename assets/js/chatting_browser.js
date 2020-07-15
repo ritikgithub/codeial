@@ -37,12 +37,14 @@ class chatBox {
                 sender_email: self.sender_email,
                 chatroom: self.chatroom
             });
+
+            $(this).find('input').val("");
         });
 
             self.socket.on('receive-message',function(data){
                 let newMessage  = $('<li>');
 
-                newMessage.append(`<span>${data.message}</span>`);
+                newMessage.append(`<p>${data.message}</p>`);
 
                 if(data.sender_email == self.sender_email)
                  newMessage.addClass('self-message');

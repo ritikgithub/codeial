@@ -1,7 +1,10 @@
 {
+  "css/chatbox.css": "css/chatbox-47fa65e55f.css",
   "css/footer.css": "css/footer-6cd4df53c1.css",
-  "css/header.css": "css/header-b43602a20f.css",
-  "css/home.css": "css/home-e432e3ae80.css",
-  "css/layout.css": "css/layout-8aeebc0e02.css",
-  "css/user_profile.css": "css/user_profile-1894758408.css"
+  "css/header.css": "css/header-8c6ca21939.css",
+  "css/home.css": "css/home-79e200f68e.css",
+  "css/layout.css": "css/layout-db5cc49def.css",
+  "css/sign-in.css": "css/sign-in-d560646c56.css",
+  "css/sign-up.css": "css/sign-up-27d4917bef.css",
+  "css/user_profile.css": "css/user_profile-397e07e6d3.css"
 }

@@ -12,54 +12,6 @@ a{
    color:inherit;
 }
 
-.chat-box{
-
-    width:250px;
-    height:300px;
-    border: 1px dotted black;
-    overflow: auto;
-    // position:fixed;
-    // bottom:0px;
-    left: auto;
-    background-color: lightgray;
-    padding:0px;
-    display: inline-block;
-
-    .input-message-container{
-        position: fixed;
-        bottom: 0px;
-        margin:0px;
-        width:100%;
-
-        .input-message{
-            margin:0px;
-            input{
-                width:17%; //isme doubt hai fixed pr aur absolute pr
-            }
-        }
-    }
-
-    .messages{
-        list-style: none;
-        padding:0px;
-       
-        li{
-            padding:10px;
-            width:80%;
-        }
-
-        .self-message{
-            text-align: right;
-           
-        }
-
-        .other-message{
-           text-align: left;
-         
-        }
-    }    
-}
-
 #search-box{
   margin: 10px 10px;
   input {
@@ -96,7 +48,7 @@ a{
     
     #all-posts {
         width: 50%;
-        overflow:scroll;
+        overflow:auto;
         #posts-form-container {
           border-bottom: 2px double rgb(146, 145, 145);
           textarea {

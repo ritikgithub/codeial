@@ -1,12 +1,14 @@
 $('#friends-list a').click(function(event){
     event.preventDefault();
-    console.log( $(this).attr('href'),'%%%%');
+    let nameOfFriend= $(this).text();
     $.ajax({
         type:'get',
         url: $(this).attr('href'),
         success: function(data){
-          
+          let chatboxContainer = $(`<div></div>`).appendTo($('#chatbox-flex'));
+          chatboxContainer.append(` <h4> ${nameOfFriend} </h4>`)
           $(`<div id="chatbox-${data.data.chatbox._id}" class="chat-box">
+         
           <div class="messages-container">
           <ul class="messages">    
           </ul>
@@ -18,8 +20,8 @@ $('#friends-list a').click(function(event){
               <button type="submit">Send</button>
           </form>
           </div>
-          </div>`).appendTo('#main-content');
-          console.log(data.data.chat_messages); 
+          </div>`).appendTo(chatboxContainer);
+         
           if(data.data.chat_messages){
           for(chat_message of data.data.chat_messages) {
              
@@ -27,17 +29,17 @@ $('#friends-list a').click(function(event){
             if(user_email != chat_message.sender.email) 
             {
                  new_message = $(`<li class="other-message">
-                    <span>
+                    <p>
                         ${chat_message.message}
-                    </span>
+                    </p>
                 </li>`);
             }
              else  
              {
                 new_message = $(`<li class="self-message">
-                    <span>
+                    <p>
                         ${chat_message.message}
-                    </span>
+                    </p>
                 </li>`);
              }
              new_message.appendTo(`#chatbox-${data.data.chatbox._id} .messages`)
